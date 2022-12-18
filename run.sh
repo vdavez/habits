@@ -7,8 +7,6 @@ else
     DB="habits.db"
 fi
 
-sqlite3 $DB ".read SCHEMA.sql"
-
 # Check today's recordings and see if there's anything there... if so, grab them...
 current=$( sqlite3 $DB 'select * from today;' )
 weight_input=$(awk -F '|' '{print $1}'<<< "$current")

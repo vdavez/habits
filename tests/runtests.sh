@@ -1,5 +1,5 @@
 #! /bin/sh
-# file: tests/test_setup.sh
+# file: tests/runtests.sh
 
 oneTimeSetUp() {
   # Create the test database
