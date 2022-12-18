@@ -12,6 +12,15 @@ Right now, I'm only tracking my weight and whether I've taken my medicine. But i
 ./run.sh
 ```
 
+## Testing
+
+We're going to use [shunit2](https://github.com/kward/shunit2) to test. Let's see how this goes...
+
+
+```sh
+./tests/runtests.sh
+```
+
 ## Why?
 
 I dunno, I like the simplicity of it and it gives me an opportunity to play with SQLite and Bash.
