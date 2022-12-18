@@ -18,7 +18,7 @@ oneTimeTearDown() {
 }
 
 testRunsh() {
-  first_line=$( printf '200.00\nN' | . ./run.sh test )
+  first_line=$( printf '200.00\nN' | ./run.sh test )
   second_line=$( sqlite3 tests/test.db 'select count(*) from weight;')
   third_line=$( sqlite3 tests/test.db 'select date, weight from weight order by date desc limit 1;')
   fourth_line=$( sqlite3 tests/test.db 'select date, taken from medicine order by date desc limit 1;')
@@ -27,7 +27,7 @@ testRunsh() {
 
 Amazing! Thanks for updating the tracker. Here are your habit results!
 +--------+----------------+
-| weight | medicine taken |
+| weight | medicine_taken |
 +--------+----------------+
 | 200    | N              |
 +--------+----------------+'
@@ -36,6 +36,33 @@ Amazing! Thanks for updating the tracker. Here are your habit results!
   assertEquals "There are now four entries in the test DB" "4" "$second_line"
   assertEquals "Weight recorded at 200" "$( date +'%Y-%m-%d' )|200" "$third_line"
   assertEquals "Medicine recorded as taken" "$( date +'%Y-%m-%d' )|N" "$fourth_line"
+
+  fifth_line=$( printf '201.00\nY' | ./run.sh test )
+  expected_new='
+
+Amazing! Thanks for updating the tracker. Here are your habit results!
++--------+----------------+
+| weight | medicine_taken |
++--------+----------------+
+| 201    | Y              |
++--------+----------------+'
+
+  assertEquals "New results are in!" "$expected_new" "$fifth_line"
+  assertEquals "There are still four entries in the test DB" "4" "$second_line"
+
+  sixth_line=$( printf '\n\n\n' | ./run.sh test )
+  expected_default='
+
+Amazing! Thanks for updating the tracker. Here are your habit results!
++--------+----------------+
+| weight | medicine_taken |
++--------+----------------+
+| 201    | Y              |
++--------+----------------+'
+
+  assertEquals "New results are in!" "$expected_default" "$sixth_line"
+  assertEquals "There are still four entries in the test DB" "4" "$second_line"
+
 }
 
 # Load shUnit2.
