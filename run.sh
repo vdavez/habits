@@ -1,7 +1,8 @@
 #!/bin/bash
 
 if [[ ! -z "$1" ]]
-then DB="tests/test.db"
+then 
+    if [ "$1" == "test" ]; then DB="tests/test.db"; else DB="$1"; fi
 else
     DB="habits.db"
 fi
