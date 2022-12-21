@@ -2,6 +2,8 @@
 
 Tracking habits at the command line using SQLite and bash.
 
+![](docs/demo.gif)
+
 ## How to set it up
 
 To set it up you need to modify the `config.ini` file and the run:
