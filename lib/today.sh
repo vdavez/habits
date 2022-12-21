@@ -1,4 +1,6 @@
 # Check today's recordings and see if there's anything there... if so, grab them...
-current=$( sqlite3 $_arg_database 'select * from today;' )
-weight_input=$(awk -F '|' '{print $1}'<<< "$current")
-medicine_input=$(awk -F '|' '{print $2}'<<< "$current")
+current=$( sqlite3 $_arg_database "select * from habits WHERE date = (date('now','localtime'));" )
+weight_input=$(awk -F '|' '{print $2}'<<< "$current")
+medicine_input=$(awk -F '|' '{print $3}'<<< "$current")
+exercise_input=$(awk -F '|' '{print $4}'<<< "$current")
+water_input=$(awk -F '|' '{print $5}'<<< "$current")
