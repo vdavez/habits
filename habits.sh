@@ -140,6 +140,10 @@ assign_positional_args 1 "${_positionals[@]}"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 _arg_database=$DIR/$_arg_database
 
+if [[ $_arg_mode == "init" ]]; then 
+	source $DIR/lib/init.sh
+fi
+
 if [[ $_arg_mode == "test" ]]; then _arg_database="tests/test.db"; fi
 
 if [[ $_arg_mode == "export" ]]; then
@@ -151,20 +155,7 @@ source $DIR/lib/today.sh
 # If there's a recording and "-s" is used, exit 
 if [[ ! -z "$weight_input" ]] && [[ "$_arg_silent" == "on" ]]; then exit 0; fi
 
-read -p "What did you weigh in at this morning? [$weight_input]: " weight
-if [[ -z "$weight" ]]  && [[ ! -z "$weight_input" ]]
-then
-    weight=$weight_input
-fi
-
-sqlite3 $_arg_database "insert into weight ('weight') values ('$weight') on conflict(date) do update set weight=$weight;"
-
-read -p "Did you take your medicine this morning (Y/N)? [$medicine_input]: " medicine
-if [[ -z "$medicine" ]] && [[ ! -z "$medicine_input" ]]
-    then medicine=$medicine_input
-fi
-
-sqlite3 $_arg_database "insert into medicine ('taken') values ('$medicine') on conflict(date) do update set taken='$medicine';"
+source $DIR/lib/input.sh
 
 printf '\n\nAmazing! Thanks for updating the tracker. Here are your habit results!\n'
-sqlite3 $_arg_database ".header on" ".mode table" "SELECT * FROM today;"
+sqlite3 $_arg_database ".header on" ".mode table" "SELECT * FROM habits where date = (date('now','localtime'));"

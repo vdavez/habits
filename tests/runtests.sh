@@ -21,13 +21,13 @@ testRunsh() {
   first_line=$( printf '200.00\nN' | ./run.sh test )
   second_line=$( sqlite3 tests/test.db 'select count(*) from weight;')
   third_line=$( sqlite3 tests/test.db 'select date, weight from weight order by date desc limit 1;')
-  fourth_line=$( sqlite3 tests/test.db 'select date, taken from medicine order by date desc limit 1;')
+  fourth_line=$( sqlite3 tests/test.db 'select date, medicine from medicine order by date desc limit 1;')
 
   expected='
 
 Amazing! Thanks for updating the tracker. Here are your habit results!
 +--------+----------------+
-| weight | medicine_taken |
+| weight | medicine       |
 +--------+----------------+
 | 200    | N              |
 +--------+----------------+'
@@ -42,7 +42,7 @@ Amazing! Thanks for updating the tracker. Here are your habit results!
 
 Amazing! Thanks for updating the tracker. Here are your habit results!
 +--------+----------------+
-| weight | medicine_taken |
+| weight | medicine       |
 +--------+----------------+
 | 201    | Y              |
 +--------+----------------+'
@@ -55,7 +55,7 @@ Amazing! Thanks for updating the tracker. Here are your habit results!
 
 Amazing! Thanks for updating the tracker. Here are your habit results!
 +--------+----------------+
-| weight | medicine_taken |
+| weight | medicine       |
 +--------+----------------+
 | 201    | Y              |
 +--------+----------------+'
