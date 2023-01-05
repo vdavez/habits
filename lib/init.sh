@@ -23,7 +23,7 @@ read -p \"${!prompt} [\$${!name}_input]: \" ${!name}" >> lib/input.sh
     ${!name}=\$${!name}_input
 fi" >> lib/input.sh
     echo "
-sqlite3 \$_arg_database \"insert into habits (date, ${!name}) values ('$_arg_update', '\$${!name}') on conflict(date) do update set ${!name}='\$${!name}';\"" >> lib/input.sh
+sqlite3 \$_arg_database \"insert into habits (date, ${!name}) values ('\$_arg_update', '\$${!name}') on conflict(date) do update set ${!name}='\$${!name}';\"" >> lib/input.sh
 }
 
 
@@ -48,9 +48,9 @@ CREATE TABLE IF NOT EXISTS habits (
 # Generate today.sh
 echo "# Check today's recordings and see if there's anything there... if so, grab them...
 
-echo \"Please input habits for: $_arg_update\"
+echo \"Please input habits for: \$_arg_update\"
 
-current=\$( sqlite3 \$_arg_database \"select * from habits WHERE date='$_arg_update';\" )" >> lib/today.sh
+current=\$( sqlite3 \$_arg_database \"select * from habits WHERE date='\$_arg_update';\" )" >> lib/today.sh
 
 declare -i today_row
 today_row=2
