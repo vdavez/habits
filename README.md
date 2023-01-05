@@ -26,7 +26,7 @@ I am using [argbash](https://argbash.readthedocs.io/en/stable/guide.html) to cre
 
 ```
 habits: A habit tracker for the CLI using Bash and SQLite
-Usage: /Users/vzvenyach/src/vdavez/habits/habits.sh [-d|--database <arg>] [-u|--update <arg>] [-s|--(no-)silent] [-h|--help] [--] [<mode>]
+Usage: ./habits.sh [-d|--database <arg>] [-u|--update <arg>] [-s|--(no-)silent] [-h|--help] [--] [<mode>]
         <mode>: the mode (currently: run, test, export) (default: 'run')
         -d, --database: the database name (default: 'habits.db')
         -u, --update: specify the date to be updated (default: '')
