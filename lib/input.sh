@@ -1,3 +1,4 @@
+echo "Please input habits for: $_arg_update"
 
 read -p "What did you weigh in at this morning? [$weight_input]: " weight
 if [[ -z "$weight" ]]  && [[ ! -z "$weight_input" ]]

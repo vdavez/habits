@@ -48,9 +48,9 @@ CREATE TABLE IF NOT EXISTS habits (
 # Generate today.sh
 echo "# Check today's recordings and see if there's anything there... if so, grab them...
 
-echo \"Please input habits for: \$_arg_update\"
-
 current=\$( sqlite3 \$_arg_database \"select * from habits WHERE date='\$_arg_update';\" )" >> lib/today.sh
+
+echo "echo \"Please input habits for: \$_arg_update\"" >> lib/input.sh
 
 declare -i today_row
 today_row=2
