@@ -26,12 +26,15 @@ I am using [argbash](https://argbash.readthedocs.io/en/stable/guide.html) to cre
 
 ```
 habits: A habit tracker for the CLI using Bash and SQLite
-Usage: ./run.sh [-d|--database <arg>] [-s|--(no-)silent] [-h|--help] [--] [<mode>]
+Usage: ./habits.sh [-d|--database <arg>] [-u|--update <arg>] [-s|--(no-)silent] [-h|--help] [--] [<mode>]
         <mode>: the mode (currently: run, test, export) (default: 'run')
         -d, --database: the database name (default: 'habits.db')
+        -u, --update: specify the date to be updated (default: '')
         -s, --silent, --no-silent: silent mode (off by default)
         -h, --help: Prints help
 ```
+
+For development purposes, to update the arguments you need to run `argbash src/arguments.m4 -o src/script.sh` and then copy the script.sh into `habits.sh`.
 
 ## Testing
 
